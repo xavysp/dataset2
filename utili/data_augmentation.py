@@ -5,8 +5,9 @@ import os
 import cv2 as cv
 import shutil
 import imutils
+import time
 
-from utili.utls import image_normalization, gamma_correction, make_dirs, cv_imshow
+from utili.utls import image_normalization, gamma_correction, make_dirs
 
 def cv_imshow(img,title='image'):
     print(img.shape)
@@ -464,12 +465,13 @@ def rotate_data(data_dir, augment_both=True):
                 if augment_both and rot_gt is not None:
                     cv.imwrite(os.path.join(current_GT_dir, gt_aug_list[j]), rot_gt)
                     tmp_imgs = np.concatenate((rot_x, rot_gt), axis=1)
-                cv.imshow('Rotate Data', tmp_imgs)
-                cv.waitKey(200)
+                # cv.imshow('Rotate Data', tmp_imgs)
+                # cv.waitKey(200)
+                time.sleep(.150)
 
             print("rotation with {} degrees fullfiled folder: {} ".format(i, folder_name))
 
-    cv.destroyAllWindows()
+    # cv.destroyAllWindows()
 
     print("... rotation done in ", folder_name)
 
@@ -513,12 +515,13 @@ def flip_data(data_dir, augment_both=True):
                 cv.imwrite(os.path.join(save_dir_gt, GT_list[j]), flip_gt)
                 tmp_imgs = np.concatenate((flip_x, flip_gt), axis=1)
 
-            cv.imshow('Flipping data',tmp_imgs)
-            cv.waitKey(200)
+            # cv.imshow('Flipping data',tmp_imgs)
+            # cv.waitKey(200)
+            time.sleep(.150)
 
         print("End flipping file in {}".format(os.path.join(X_dir, i)))
 
-    cv.destroyAllWindows()
+    # cv.destroyAllWindows()
 
     print("... Flipping  data augmentation finished")
 
@@ -581,21 +584,22 @@ def gamma_data(data_dir,augment_both=True, in_gt=False):
             cv.imwrite(os.path.join(save_dir_x60, X_list[j]), gam60_x)
             cv.imwrite(os.path.join(save_dir_x80, X_list[j]), gam80_x)
 
-            tmp_imgs = np.concatenate((gam30_x, gam60_x, gam80_x), axis=1)
+            # tmp_imgs = np.concatenate((gam30_x, gam60_x, gam80_x), axis=1)
             if augment_both:
                 cv.imwrite(os.path.join(save_dir_gt30, GT_list[j]), gt_tmp)
                 cv.imwrite(os.path.join(save_dir_gt60, GT_list[j]), gt_tmp)
                 cv.imwrite(os.path.join(save_dir_gt80, GT_list[j]), gt_tmp)
-                tmp_imgs1 = np.concatenate((gam30_x, gt_tmp), axis=1)
-                tmp_imgs2 = np.concatenate((gam60_x, gt_tmp), axis=1)
-                tmp_imgs3 = np.concatenate((gam80_x, gt_tmp), axis=1)
-                tmp_imgs = np.concatenate((tmp_imgs1, tmp_imgs2, tmp_imgs3), axis=0)
-            cv.imshow('gramma correction',tmp_imgs)
-            cv.waitKey(200)
+                # tmp_imgs1 = np.concatenate((gam30_x, gt_tmp), axis=1)
+                # tmp_imgs2 = np.concatenate((gam60_x, gt_tmp), axis=1)
+                # tmp_imgs3 = np.concatenate((gam80_x, gt_tmp), axis=1)
+                # tmp_imgs = np.concatenate((tmp_imgs1, tmp_imgs2, tmp_imgs3), axis=0)
+            # cv.imshow('gramma correction',tmp_imgs)
+            # cv.waitKey(200)
+            time.sleep(.150)
 
         print("End gamma correction, file in {}".format(os.path.join(X_dir, i)))
 
-    cv.destroyAllWindows()
+    # cv.destroyAllWindows()
 
     print("... gamma correction  data augmentation finished")
 
@@ -650,12 +654,13 @@ def scale_data(data_dir,augment_both=True):
                 cv.imwrite(os.path.join(save_dir_gts2, GT_list[j]), gt_tmp2)
 
             tmp_imgs = np.concatenate((x_tmp1, gt_tmp1), axis=1)
-            cv.imshow('scaling image 0.5',tmp_imgs)
-            cv.waitKey(300)
+            # cv.imshow('scaling image 0.5',tmp_imgs)
+            # cv.waitKey(300)
+            time.sleep(.150)
 
         print("Scaling finished, file in {}".format(os.path.join(X_dir, i)))
 
-    cv.destroyAllWindows()
+    # cv.destroyAllWindows()
 
     print("... Scaling augmentation has finished")
 
