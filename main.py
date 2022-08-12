@@ -22,15 +22,15 @@ if __name__ == '__main__':
 
 
     # op = input("Please select the operation (Op): ")
-    op = 1 #input("Choice one option above, then [Enter] ")
+    op = 0 #input("Choice one option above, then [Enter] ")
     if op==0:
-        base_dir = '/opt/dataset' if IS_LINUX else "C:/Users/xavysp/dataset"
-        dataset_name = 'SDED'
-        img_base_dir = 'train/imgs/aug'
-        gt_base_dir = 'test_edges'
+        base_dir = '/root/workspace/datasets' if IS_LINUX else "C:/Users/xavysp/dataset"
+        dataset_name = 'BIPED'
+        img_base_dir = 'edges/imgs/train/rgbr/aug'
+        gt_base_dir = 'edges/edge_maps/train/rgbr/aug'
         save_file = os.path.join(base_dir, dataset_name)
         files_idcs = []
-        simple_list = True
+        simple_list = False
         if simple_list:
             # img_dirs = os.path.join(save_file, img_base_dir)
             # gt_base_dir = os.path.join(save_file, gt_base_dir)
@@ -50,7 +50,9 @@ if __name__ == '__main__':
                         (os.path.join(img_dirs + '/' + file_name + '.jpg'),
                          os.path.join(gt_base_dir + '/' + dir_name + '/' + file_name + '.png'),))
         # save files
-        save_path = os.path.join(save_file, 'test_pair.lst')
+        print(os.path.join(img_dirs+'/'+file_name+'.jpg'))
+        print(os.path.join(gt_base_dir+'/'+dir_name+'/'+file_name+'.png'))
+        save_path = os.path.join(save_file, 'train_pair.lst')
         with open(save_path, 'w') as txtfile:
             json.dump(files_idcs, txtfile)
 
@@ -64,8 +66,10 @@ if __name__ == '__main__':
         tmp_files = recov_data[15]
         img = cv.imread(os.path.join(save_file, tmp_files[0]))
         gt = cv.imread(os.path.join(save_file, tmp_files[1]))
-        cv_imshow(img, 'rgb image')
-        cv_imshow(gt, 'gt image')
+        print(f"Image size {img.shape()}, file name {tmp_files[0]}")
+        print(f"GT size {gt.shape()}, file name {tmp_files[1]}")
+        # cv_imshow(img, 'rgb image')
+        # cv_imshow(gt, 'gt image')
 
 
     elif op==1:
