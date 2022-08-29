@@ -527,22 +527,21 @@ def flip_data(data_dir, augment_both=True):
 
 def gamma_data(data_dir,augment_both=True, in_gt=False):
 
-    # X_dir = data_dir[0]
-    X_dir = data_dir
+    X_dir = data_dir[0]
+    # X_dir = data_dir
     GT_dir=data_dir[1]
 
     gamma40 = '_ga40'
     gamma60 = '_ga60'
     gamma80 = '_ga80'
-    # dir_list = os.listdir(X_dir)
     dir_list = os.listdir(X_dir)
+    # dir_list = os.listdir(X_dir)
     dir_list.sort()
     if augment_both:
         gt_folders = os.listdir(GT_dir)
         gt_folders.sort()
         if not dir_list ==gt_folders:
             raise NotImplementedError('gt and x folders not match')
-    # for i in (dir_list):
     for i in (dir_list):
         X_list = os.listdir(os.path.join(X_dir, i))
         X_list.sort()
