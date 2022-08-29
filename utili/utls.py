@@ -2,6 +2,9 @@ import numpy as np
 import cv2 as cv
 import os
 
+from PIL import Image
+from utili.transforms import RGBTransform
+
 def cv_imshow(img,title='image'):
     print(img.shape)
     cv.imshow(title,img)
@@ -132,7 +135,26 @@ def adding_Nimgs(dataset_dir,gt_dirs, gt_dir_list=None):
                 gt=tmp_gt
         cv.imwrite(os.path.join(save_dir, img_name), gt)
         print('saved in: ',os.path.join(save_dir, img_name))
+def meanImg_transform(img):
 
+    imgInt8=img.copy()
+    img= np.float32(img)
+    B,G,R = cv.split(img)
+    i1Bm, i1Gm, i1Rm=np.mean(B), np.mean(G), np.mean(R)
+    a = [i1Bm, i1Gm, i1Rm]
+    max_value = max(a)
+    max_index = a.index(max_value)
+    print('Max index ', max_index)
+    if max_index == 0:
+        mat_channels = (0, 0, 255)
+    elif max_index == 1:
+        mat_channels = (0, 255, 0)
+    else:
+        mat_channels = (255, 0, 0)
+    img_rgb = cv.cvtColor(imgInt8, cv.COLOR_BGR2RGB)
+    img_rgb = Image.fromarray(img_rgb)
+    tranImg = RGBTransform().mix_with(mat_channels, factor=.10).applied_to(img_rgb)
 
+    return tranImg
 
 
