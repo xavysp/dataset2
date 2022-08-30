@@ -22,7 +22,7 @@ if __name__ == '__main__':
 
 
     # op = input("Please select the operation (Op): ")
-    op = -1 #input("Choice one option above, then [Enter] ")
+    op = 1 #input("Choice one option above, then [Enter] ")
     if op==0:
         base_dir = '/root/workspace/datasets' if IS_LINUX else "C:/Users/xavysp/dataset"
         dataset_name = 'BIPED'
@@ -66,8 +66,8 @@ if __name__ == '__main__':
         tmp_files = recov_data[15]
         img = cv.imread(os.path.join(save_file, tmp_files[0]))
         gt = cv.imread(os.path.join(save_file, tmp_files[1]))
-        print(f"Image size {img.shape()}, file name {tmp_files[0]}")
-        print(f"GT size {gt.shape()}, file name {tmp_files[1]}")
+        print(f"Image size {img.shape}, file name {tmp_files[0]}")
+        print(f"GT size {gt.shape}, file name {tmp_files[1]}")
         # cv_imshow(img, 'rgb image')
         # cv_imshow(gt, 'gt image')
 
