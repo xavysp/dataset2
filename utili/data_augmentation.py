@@ -527,15 +527,14 @@ def flip_data(data_dir, augment_both=True):
 
 def gamma_data(data_dir,augment_both=True, in_gt=False):
 
-    X_dir = data_dir[0]
-    # X_dir = data_dir
+    # X_dir = data_dir[0]
+    X_dir = data_dir
     GT_dir=data_dir[1]
 
     gamma40 = '_ga40'
     gamma60 = '_ga60'
     gamma80 = '_ga80'
     dir_list = os.listdir(X_dir)
-    # dir_list = os.listdir(X_dir)
     dir_list.sort()
     if augment_both:
         gt_folders = os.listdir(GT_dir)
@@ -574,10 +573,10 @@ def gamma_data(data_dir,augment_both=True, in_gt=False):
                 gam60_x = gamma_correction(x_tmp, 0.6060, False)
                 # gam80_x = gamma_correction(x_tmp, 0.8080, True)
                 gam80_x = meanImg_transform(np.uint8(image_normalization(gam40_x)))
-                gam80_x = np.asarray(gam80_x)
                 gam40_x = np.uint8(image_normalization(gam40_x))
                 gam60_x = np.uint8(image_normalization(gam60_x))
                 gam80_x = np.uint8(image_normalization(gam80_x))
+                gam80_x = cv.cvtColor(gam80_x,cv.COLOR_RGB2BGR)
             else:
                 gam40_x=x_tmp
                 gam60_x = x_tmp

@@ -22,7 +22,7 @@ if __name__ == '__main__':
 
 
     # op = input("Please select the operation (Op): ")
-    op = 1 #input("Choice one option above, then [Enter] ")
+    op = -1 #input("Choice one option above, then [Enter] ")
     if op==0:
         base_dir = '/root/workspace/datasets' if IS_LINUX else "C:/Users/xavysp/dataset"
         dataset_name = 'BIPED'
@@ -88,6 +88,7 @@ if __name__ == '__main__':
         # img = cv.imread(os.path.join(base_dir,'RGB_107G80.jpg'))# 277, 205
         # img2 = cv.imread(os.path.join(base_dir,list_file[205]))# 277, 205
         # img3 = cv.imread(os.path.join(base_dir,list_file[30]))# 277, 205
+
 
         # i2Bm, i2Gm, i2Rm = meanImg(img2)
         # i3Bm, i3Gm, i3Rm = meanImg(img3)

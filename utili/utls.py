@@ -146,15 +146,17 @@ def meanImg_transform(img):
     max_index = a.index(max_value)
     print('Max index ', max_index)
     if max_index == 0:
+        # mat_channels = (255, 0, 0)
         mat_channels = (0, 0, 255)
     elif max_index == 1:
         mat_channels = (0, 255, 0)
     else:
         mat_channels = (255, 0, 0)
+        # mat_channels = (0, 0, 255)
     img_rgb = cv.cvtColor(imgInt8, cv.COLOR_BGR2RGB)
     img_rgb = Image.fromarray(img_rgb)
-    tranImg = RGBTransform().mix_with(mat_channels, factor=.10).applied_to(img_rgb)
-
+    tranImg = RGBTransform().mix_with(mat_channels, factor=.17).applied_to(img_rgb)
+    tranImg = np.asarray(tranImg)
     return tranImg
 
 
