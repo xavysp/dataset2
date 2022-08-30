@@ -527,8 +527,8 @@ def flip_data(data_dir, augment_both=True):
 
 def gamma_data(data_dir,augment_both=True, in_gt=False):
 
-    # X_dir = data_dir[0]
-    X_dir = data_dir
+    X_dir = data_dir[0]
+    # X_dir = data_dir
     GT_dir=data_dir[1]
 
     gamma40 = '_ga40'
