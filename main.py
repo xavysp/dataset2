@@ -10,6 +10,7 @@ import cv2 as cv
 import re
 
 from utili.data_augmentation import augment_data, gamma_data
+from utili import data_manager as dm
 from utili.utls import *
 
 IS_LINUX = True if platform.system()=='Linux' else False
@@ -19,10 +20,11 @@ if __name__ == '__main__':
     print("Below you will find the basic operation to run: \n")
     print("Op 0: Dataset list maker .txt in json")
     print("Op 1. data augmentation")
+    print("Op 2. mean pixels value")
 
 
     # op = input("Please select the operation (Op): ")
-    op = 1 #input("Choice one option above, then [Enter] ")
+    op = 2 #input("Choice one option above, then [Enter] ")
     if op==0:
         base_dir = '/root/workspace/datasets' if IS_LINUX else "C:/Users/xavysp/dataset"
         dataset_name = 'BIPED'
@@ -77,6 +79,31 @@ if __name__ == '__main__':
         dataset = 'BIPED'
         augment_both=True# to augment the input and target
         augment_data(base_dir=base_dir,augment_both=augment_both,dataName=dataset, use_all_augs=True)
+
+    elif op ==2:
+        base_dir = '/root/workspace/datasets' if IS_LINUX else "C:/Users/xavysp/dataset"
+        dataset_dir = os.path.join(
+            base_dir,'BIPED','edges','imgs','train','rgbr','aug')
+        dir_list = dm.list_files(dataset_dir)
+        n = len(dir_list)
+        acc_mean =[]
+        for i in dir_list:
+            list_img = os.listdir(os.path.join(dataset_dir,i))
+            print(f'Working on {i}')
+            for img_name in list_img:
+
+                tmp_path = os.path.join(dataset_dir,i, img_name)
+                tmp_img = cv.imread(tmp_path)
+                # tmp_img= tmp_img[:,:,2]
+                tmp_mean= np.mean(np.float32(tmp_img),axis=(0,1))
+                # tmp_mean= np.mean(tmp_mean)
+                acc_mean.append(tmp_mean)
+
+        m = len(acc_mean)
+        data_mean = np.mean(acc_mean,axis=0)
+        print(f"Mean balues of dataset R= {data_mean[-1]}, G= {data_mean[1]}, B= {data_mean[0]}.")
+        print(f"{m} images considered for mean calculation.")
+        print(data_mean)
 
     else:
         print("(Please try other options")

@@ -568,11 +568,11 @@ def gamma_data(data_dir,augment_both=True, in_gt=False):
             x_tmp = cv.imread(os.path.join(X_dir, os.path.join(i, X_list[j])))
             if not in_gt:
                 x_tmp = image_normalization(x_tmp,0,1)
-                gam40_x = gamma_correction(x_tmp, 0.4040, False)
+                gam40_x = gamma_correction(x_tmp, 0.4040, True)
                 # gam30_x = gamma_correction(x_tmp, 0.3030, False)
                 gam60_x = gamma_correction(x_tmp, 0.6060, False)
                 # gam80_x = gamma_correction(x_tmp, 0.8080, True)
-                gam80_x = meanImg_transform(np.uint8(image_normalization(gam40_x)))
+                gam80_x = meanImg_transform(np.uint8(image_normalization(gam60_x)))
                 gam40_x = np.uint8(image_normalization(gam40_x))
                 gam60_x = np.uint8(image_normalization(gam60_x))
                 gam80_x = np.uint8(image_normalization(gam80_x))
