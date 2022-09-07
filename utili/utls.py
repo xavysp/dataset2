@@ -155,7 +155,7 @@ def meanImg_transform(img):
         # mat_channels = (0, 0, 255)
     img_rgb = cv.cvtColor(imgInt8, cv.COLOR_BGR2RGB)
     img_rgb = Image.fromarray(img_rgb)
-    tranImg = RGBTransform().mix_with(mat_channels, factor=.17).applied_to(img_rgb)
+    tranImg = RGBTransform().mix_with(mat_channels, factor=.2).applied_to(img_rgb)
     tranImg = np.asarray(tranImg)
     return tranImg
 
