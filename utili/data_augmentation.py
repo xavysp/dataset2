@@ -606,6 +606,76 @@ def gamma_data(data_dir,augment_both=True, in_gt=False):
 
     print("... gamma correction  data augmentation finished")
 
+def gamma_data0(data_dir,augment_both=True, in_gt=False):
+
+    X_dir = data_dir[0]
+    # X_dir = data_dir
+    GT_dir=data_dir[1]
+
+    gamma40 = '_ga30'
+    gamma60 = '_ga60'
+    dir_list = os.listdir(X_dir)
+    dir_list.sort()
+    if augment_both:
+        gt_folders = os.listdir(GT_dir)
+        gt_folders.sort()
+        if not dir_list ==gt_folders:
+            raise NotImplementedError('gt and x folders not match')
+    for i in (dir_list):
+        X_list = os.listdir(os.path.join(X_dir, i))
+        X_list.sort()
+        save_dir_x40 = X_dir + '/' + str(i) + gamma40
+        save_dir_x60 = X_dir + '/' + str(i) + gamma60
+        _ = make_dirs(save_dir_x40)
+        _ = make_dirs(save_dir_x60)
+        n =len(X_list)
+        if augment_both:
+            GT_list = os.listdir(os.path.join(GT_dir, i))
+            GT_list.sort()
+            save_dir_gt40 = GT_dir + '/' + str(i) + gamma40
+            save_dir_gt60 = GT_dir + '/' + str(i) + gamma60
+            _=make_dirs(save_dir_gt40)
+            _=make_dirs(save_dir_gt60)
+            n = len(GT_list) if len(X_list) == len(GT_list) else None
+            print("Working on the dir: ", os.path.join(X_dir, i), os.path.join(GT_dir, i))
+        else:
+            print("Working on the dir: ", os.path.join(X_dir, i))
+        for j in range(n):
+            x_tmp = cv.imread(os.path.join(X_dir, os.path.join(i, X_list[j])))
+            if not in_gt:
+                x_tmp = image_normalization(x_tmp,0,1)
+                gam40_x = gamma_correction(x_tmp, 0.4040, True)
+                # gam30_x = gamma_correction(x_tmp, 0.3030, False)
+                gam60_x = gamma_correction(x_tmp, 0.6060, False)
+                gam40_x = np.uint8(image_normalization(gam40_x))
+                gam60_x = np.uint8(image_normalization(gam60_x))
+            else:
+                gam40_x=x_tmp
+                gam60_x = x_tmp
+            if augment_both:
+                gt_tmp = cv.imread(os.path.join(GT_dir, os.path.join(i, GT_list[j])))
+            cv.imwrite(os.path.join(save_dir_x40, X_list[j]), gam40_x)
+            cv.imwrite(os.path.join(save_dir_x60, X_list[j]), gam60_x)
+
+            # tmp_imgs = np.concatenate((gam30_x, gam60_x, gam80_x), axis=1)
+            if augment_both:
+                cv.imwrite(os.path.join(save_dir_gt40, GT_list[j]), gt_tmp)
+                cv.imwrite(os.path.join(save_dir_gt60, GT_list[j]), gt_tmp)
+
+                # tmp_imgs1 = np.concatenate((gam30_x, gt_tmp), axis=1)
+                # tmp_imgs2 = np.concatenate((gam60_x, gt_tmp), axis=1)
+                # tmp_imgs3 = np.concatenate((gam80_x, gt_tmp), axis=1)
+                # tmp_imgs = np.concatenate((tmp_imgs1, tmp_imgs2, tmp_imgs3), axis=0)
+            # cv.imshow('gramma correction',tmp_imgs)
+            # cv.waitKey(200)
+            time.sleep(.150)
+
+        print("End gamma correction, file in {}".format(os.path.join(X_dir, i)))
+
+    # cv.destroyAllWindows()
+
+    print("... gamma correction  data augmentation finished")
+
 def scale_data(data_dir,augment_both=True):
 
     X_dir = data_dir[0]
@@ -720,6 +790,7 @@ def augment_data(base_dir,augment_both, dataName,use_all_augs=True):
     if correction_gamma:
         print("Image augmentation by gamma correction have started!")
         gamma_data(data_dir=dataset_dirs, augment_both=augment_both, in_gt=augment_gt)
+        # gamma_data0(data_dir=dataset_dirs, augment_both=augment_both, in_gt=augment_gt)
 
     if image_scaling:
         print("Data augmentation by image scaling has started!")
