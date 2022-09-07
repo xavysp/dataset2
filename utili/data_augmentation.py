@@ -533,7 +533,7 @@ def gamma_data(data_dir,augment_both=True, in_gt=False):
 
     gamma40 = '_ga40'
     gamma60 = '_ga60'
-    gamma80 = '_ga80'
+    gamma80 = '_gaEX'
     dir_list = os.listdir(X_dir)
     dir_list.sort()
     if augment_both:
