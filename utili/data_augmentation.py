@@ -789,8 +789,8 @@ def augment_data(base_dir,augment_both, dataName,use_all_augs=True):
 
     if correction_gamma:
         print("Image augmentation by gamma correction have started!")
-        gamma_data(data_dir=dataset_dirs, augment_both=augment_both, in_gt=augment_gt)
-        # gamma_data0(data_dir=dataset_dirs, augment_both=augment_both, in_gt=augment_gt)
+        # gamma_data(data_dir=dataset_dirs, augment_both=augment_both, in_gt=augment_gt)
+        gamma_data0(data_dir=dataset_dirs, augment_both=augment_both, in_gt=augment_gt)
 
     if image_scaling:
         print("Data augmentation by image scaling has started!")
