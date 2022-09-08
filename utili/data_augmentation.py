@@ -355,6 +355,7 @@ def split_data(data_dir,augment_both=True):
     # splitting up
     tmp_img = cv.imread(os.path.join(
         os.path.join(img_dir, 'real'), x_list[0]))
+
     img_width = tmp_img.shape[1]
     img_height = tmp_img.shape[0]
 
@@ -372,6 +373,9 @@ def split_data(data_dir,augment_both=True):
     for i in range(n):
         x_tmp = cv.imread(os.path.join(
             os.path.join(img_dir, 'real'), x_list[i]))
+        x_tmp = image_normalization(x_tmp,0,1)
+        x_tmp=gamma_correction(x_tmp, 0.4040, False)
+        x_tmp = np.uint8(image_normalization(x_tmp))
         x_tmp1 = x_tmp[:, 0:img_height, :]
         x_tmp2 = x_tmp[:, img_width - img_height:img_width, :]
         cv.imwrite(os.path.join(x_p1_dir,x_list[i]), x_tmp1)

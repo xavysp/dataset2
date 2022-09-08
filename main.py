@@ -75,7 +75,7 @@ if __name__ == '__main__':
 
 
     elif op==1:
-        base_dir= '/root/workspace/datasets' if IS_LINUX else '../../dataset'
+        base_dir= '/root/workspace/datasets' if IS_LINUX else "C:/Users/xavysp/dataset"
         dataset = 'BIPED'
         augment_both=True# to augment the input and target
         augment_data(base_dir=base_dir,augment_both=augment_both,dataName=dataset, use_all_augs=True)
