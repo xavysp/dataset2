@@ -374,7 +374,7 @@ def split_data(data_dir,augment_both=True):
         x_tmp = cv.imread(os.path.join(
             os.path.join(img_dir, 'real'), x_list[i]))
         x_tmp = image_normalization(x_tmp,0,1)
-        x_tmp=gamma_correction(x_tmp, 0.4040, False)
+        x_tmp=gamma_correction(x_tmp, 0.55, False)
         x_tmp = np.uint8(image_normalization(x_tmp))
         x_tmp1 = x_tmp[:, 0:img_height, :]
         x_tmp2 = x_tmp[:, img_width - img_height:img_width, :]
