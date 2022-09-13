@@ -373,9 +373,9 @@ def split_data(data_dir,augment_both=True):
     for i in range(n):
         x_tmp = cv.imread(os.path.join(
             os.path.join(img_dir, 'real'), x_list[i]))
-        x_tmp = image_normalization(x_tmp,0,1)
-        x_tmp=gamma_correction(x_tmp, 0.55, False)
-        x_tmp = np.uint8(image_normalization(x_tmp))
+        # x_tmp = image_normalization(x_tmp,0,1)
+        # x_tmp=gamma_correction(x_tmp, 0.55, False)
+        # x_tmp = np.uint8(image_normalization(x_tmp))
         x_tmp1 = x_tmp[:, 0:img_height, :]
         x_tmp2 = x_tmp[:, img_width - img_height:img_width, :]
         cv.imwrite(os.path.join(x_p1_dir,x_list[i]), x_tmp1)
@@ -648,17 +648,17 @@ def gamma_data0(data_dir,augment_both=True, in_gt=False):
             x_tmp = cv.imread(os.path.join(X_dir, os.path.join(i, X_list[j])))
             if not in_gt:
                 x_tmp = image_normalization(x_tmp,0,1)
-                gam40_x = gamma_correction(x_tmp, 0.4040, True)
-                # gam30_x = gamma_correction(x_tmp, 0.3030, False)
-                gam60_x = gamma_correction(x_tmp, 0.6060, False)
-                gam40_x = np.uint8(image_normalization(gam40_x))
+                x_tmp = gamma_correction(x_tmp, 0.4040, False)
+                gam30_x = gamma_correction(x_tmp, 0.3030, True)
+                gam60_x = gamma_correction(x_tmp, 0.6060, True)
+                gam30_x = np.uint8(image_normalization(gam30_x))
                 gam60_x = np.uint8(image_normalization(gam60_x))
             else:
-                gam40_x=x_tmp
+                gam30_x=x_tmp
                 gam60_x = x_tmp
             if augment_both:
                 gt_tmp = cv.imread(os.path.join(GT_dir, os.path.join(i, GT_list[j])))
-            cv.imwrite(os.path.join(save_dir_x40, X_list[j]), gam40_x)
+            cv.imwrite(os.path.join(save_dir_x40, X_list[j]), gam30_x)
             cv.imwrite(os.path.join(save_dir_x60, X_list[j]), gam60_x)
 
             # tmp_imgs = np.concatenate((gam30_x, gam60_x, gam80_x), axis=1)
