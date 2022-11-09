@@ -71,6 +71,7 @@ if __name__ == '__main__':
         gt = cv.imread(os.path.join(save_file, tmp_files[1]))
         print(f"Image size {img.shape}, file name {tmp_files[0]}")
         print(f"GT size {gt.shape}, file name {tmp_files[1]}")
+        print("Total data> ", len(recov_data))
         # cv_imshow(img, 'rgb image')
         # cv_imshow(gt, 'gt image')
 
