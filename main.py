@@ -28,8 +28,8 @@ if __name__ == '__main__':
     if op==0:
         base_dir = '/root/workspace/datasets' if IS_LINUX else "C:/Users/xavysp/dataset"
         dataset_name = 'BIPED'
-        img_base_dir = 'edges/imgs/train/rgbr/augB5'
-        gt_base_dir = 'edges/edge_maps/train/rgbr/augB5'
+        img_base_dir = 'edges/imgs/train/rgbr/augB3'
+        gt_base_dir = 'edges/edge_maps/train/rgbr/augB3'
         list_file_name ='train_pairB5.lst'
         save_file = os.path.join(base_dir, dataset_name)
         files_idcs = []
