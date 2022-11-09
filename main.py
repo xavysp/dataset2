@@ -28,8 +28,9 @@ if __name__ == '__main__':
     if op==0:
         base_dir = '/root/workspace/datasets' if IS_LINUX else "C:/Users/xavysp/dataset"
         dataset_name = 'BIPED'
-        img_base_dir = 'edges/imgs/train/rgbr/aug'
-        gt_base_dir = 'edges/edge_maps/train/rgbr/aug'
+        img_base_dir = 'edges/imgs/train/rgbr/augB5'
+        gt_base_dir = 'edges/edge_maps/train/rgbr/augB5'
+        list_file_name ='train_pairB5.lst'
         save_file = os.path.join(base_dir, dataset_name)
         files_idcs = []
         simple_list = False
@@ -54,7 +55,7 @@ if __name__ == '__main__':
         # save files
         print(os.path.join(img_dirs+'/'+file_name+'.jpg'))
         print(os.path.join(gt_base_dir+'/'+dir_name+'/'+file_name+'.png'))
-        save_path = os.path.join(save_file, 'train_pair0.lst')
+        save_path = os.path.join(save_file, list_file_name)
         with open(save_path, 'w') as txtfile:
             json.dump(files_idcs, txtfile)
 
