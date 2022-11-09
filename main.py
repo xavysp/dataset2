@@ -24,7 +24,7 @@ if __name__ == '__main__':
 
 
     # op = input("Please select the operation (Op): ")
-    op = 1 #input("Choice one option above, then [Enter] ")
+    op = 0 #input("Choice one option above, then [Enter] ")
     if op==0:
         base_dir = '/root/workspace/datasets' if IS_LINUX else "C:/Users/xavysp/dataset"
         dataset_name = 'BIPED'
@@ -54,7 +54,7 @@ if __name__ == '__main__':
         # save files
         print(os.path.join(img_dirs+'/'+file_name+'.jpg'))
         print(os.path.join(gt_base_dir+'/'+dir_name+'/'+file_name+'.png'))
-        save_path = os.path.join(save_file, 'train_pair.lst')
+        save_path = os.path.join(save_file, 'train_pair0.lst')
         with open(save_path, 'w') as txtfile:
             json.dump(files_idcs, txtfile)
 
